@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9525663ED4EA07C3F7249C28 /* Pods_EdClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A197DD3E588496C9FA777247 /* Pods_EdClient.framework */; };
 		B264650922A59BB900FCC6F2 /* EdClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B264650722A59BB900FCC6F2 /* EdClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2EAD75B22A59E22007A25B6 /* EdClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EAD75A22A59E22007A25B6 /* EdClient.swift */; };
+		B2EAD75D22A59E42007A25B6 /* EEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EAD75C22A59E42007A25B6 /* EEndPoint.swift */; };
+		B2EAD75F22A5A0EB007A25B6 /* SampleUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EAD75E22A5A0EB007A25B6 /* SampleUsage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +20,9 @@
 		B264650422A59BB900FCC6F2 /* EdClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EdClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B264650722A59BB900FCC6F2 /* EdClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdClient.h; sourceTree = "<group>"; };
 		B264650822A59BB900FCC6F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2EAD75A22A59E22007A25B6 /* EdClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdClient.swift; sourceTree = "<group>"; };
+		B2EAD75C22A59E42007A25B6 /* EEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEndPoint.swift; sourceTree = "<group>"; };
+		B2EAD75E22A5A0EB007A25B6 /* SampleUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUsage.swift; sourceTree = "<group>"; };
 		F880F5EC6069D47E3E127E01 /* Pods-EdClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EdClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EdClient/Pods-EdClient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +70,9 @@
 			children = (
 				B264650722A59BB900FCC6F2 /* EdClient.h */,
 				B264650822A59BB900FCC6F2 /* Info.plist */,
+				B2EAD75A22A59E22007A25B6 /* EdClient.swift */,
+				B2EAD75C22A59E42007A25B6 /* EEndPoint.swift */,
+				B2EAD75E22A5A0EB007A25B6 /* SampleUsage.swift */,
 			);
 			path = EdClient;
 			sourceTree = "<group>";
@@ -120,6 +129,7 @@
 				TargetAttributes = {
 					B264650322A59BB900FCC6F2 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -129,6 +139,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = B26464FA22A59BB900FCC6F2;
 			productRefGroup = B264650522A59BB900FCC6F2 /* Products */;
@@ -176,6 +187,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2EAD75D22A59E42007A25B6 /* EEndPoint.swift in Sources */,
+				B2EAD75F22A5A0EB007A25B6 /* SampleUsage.swift in Sources */,
+				B2EAD75B22A59E22007A25B6 /* EdClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +322,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F880F5EC6069D47E3E127E01 /* Pods-EdClient.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -324,6 +339,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Eddie.LukeAtmey.EdClient;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -333,6 +349,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A80F10D4A48F6546C440BD2B /* Pods-EdClient.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
