@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import Promises
 
 // Sample APIS description
 struct API {}
@@ -36,9 +37,33 @@ struct CustomerModel: Codable {
 }
 
 // Sample usage
-func test() {
+func singleRequest() {
 
-    // TODO: Continue with Rx
-    EdClient.shared.request(API.Customer.get(id: "123"))
-
+    // Promises a single request and error
+    EdClient.shared.request(API.Customer.get(id: "123")).then { customer in
+        print("\(customer.id) - \(customer.name), - \(customer.email)")
+    }.catch({ print($0) })
 }
+
+func multipleRequest(_ ids: [String]) {
+
+//    HUD.show()
+    all( ids.map({ EdClient.shared.request(API.Customer.get(id: $0)) })
+    ).then { $0.first(where: { $0.email == "eddie.marvin116@gmail.com" })
+    }.then { print("Hello \($0?.name ?? "anon")") }
+    .catch { print($0) }
+    .always { /* HUD.hide() */ }
+}
+
+func chainRequest() {
+    EdClient.shared.request(API.Customer.get(id: "11")).then {
+        var y = $0; y.name = "Eddie"
+        try await (EdClient.shared.request(API.Customer.update(y)))
+    }.then {
+        guard $0.name == "Eddie" else { throw "Update failed" }
+        print("Hi \($0.email)")
+
+    }.catch { print($0) }
+}
+
+extension String: Error {}

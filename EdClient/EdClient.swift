@@ -8,8 +8,7 @@
 
 import Foundation
 import Alamofire
-import RxSwift
-import RxCocoa
+import Promises
 
 // This is for RxSwift
 protocol ClientProtocol {
@@ -17,10 +16,10 @@ protocol ClientProtocol {
     /// kean.github:
     /// Each request is wrapped in a Single observable provided by RxSwift.
     /// I’m going to show why this is useful later in a Usage section
-    func request<Response>(_ endpoint: EEndPoint<Response>) -> Single<Response>
+    func request<Response>(_ endpoint: EEndPoint<Response>) -> Promise<Response>
 }
 
-final class EdClient: ClientProtocol {
+final class EdClient {
 
     // MARK: - Definiations
     private let manager: SessionManager
@@ -62,12 +61,14 @@ final class EdClient: ClientProtocol {
         manager = SessionManager(configuration: configuration)
         manager.retrier = OAuth2Retrier()
     }
+}
 
+extension EdClient: ClientProtocol {
     // RxSwift
-    func request<Response>(_ endpoint: EEndPoint<Response>) -> Single<Response> {
+    func request<Response>(_ endpoint: EEndPoint<Response>) -> Promise<Response> {
 
         // RxSwift
-        return Single<Response>.create { observer in
+        return Promise<Response> { fullfill, reject in
 
             // Alamofire
             let request = self.manager.request(
@@ -81,17 +82,11 @@ final class EdClient: ClientProtocol {
                 .responseData(queue: self.queue) { response in
                     let result = response.result.flatMap(endpoint.decode)
                     switch result {
-                    case let .success(val): observer(.success(val))
-                    case let .failure(err): observer(.error(err))
+                    case let .success(val): fullfill(val)
+                    case let .failure(err): reject(err)
                     }
             }
-
-            // RxSwift
-            return Disposables.create {
-                request.cancel()
-            }
         }
-
     }
 
     private func fullURL(_ path: Path) -> URL { return baseURL.appendingPathComponent(path) }

@@ -7,7 +7,6 @@ target 'EdClient' do
 
   # Pods for EdClient
   pod 'Alamofire'
-  pod 'RxSwift'
-  pod 'RxCocoa'
+  pod 'PromisesSwift'
 
 end
